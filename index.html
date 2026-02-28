@@ -3,40 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domandella Importantella 💛</title>
+    <title>Per Te 💛</title>
     <style>
-        body { background: #ffe6e6; text-align: center; font-family: 'Arial', sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; margin: 0; }
-        h1 { color: #ff4d4d; font-size: 2.5rem; }
-        .buttons { margin-top: 30px; position: relative; width: 100%; height: 100px; }
-        button { padding: 15px 30px; font-size: 1.2rem; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; }
-        #btnSi { background-color: #ff4d4d; color: white; margin-right: 20px; }
-        #btnNo { background-color: #888; color: white; position: absolute; }
+        /* Sfondo e centratura */
+        body { 
+            background: #fff5f5; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: 'Arial', sans-serif;
+            perspective: 1500px; /* Effetto profondità 3D */
+        }
+
+        /* Contenitore del libro */
+        .book {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            cursor: pointer;
+        }
+
+        /* Classe per l'apertura (si attiva al click) */
+        .book.open {
+            transform: rotateY(-160deg);
+        }
+
+        /* Caratteristiche comuni a copertina e interno */
+        .cover, .content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px 20px 20px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* COPERTINA (Esterna) */
+        .cover {
+            background: #ff4d4d;
+            color: white;
+            z-index: 2;
+            transform-origin: left;
+            transition: transform 1s;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #e63939;
+        }
+
+        .cover h2 { font-size: 1.8rem; }
+
+        /* INTERNO (La domanda) */
+        .content {
+            background: white;
+            color: #333;
+            transform: rotateY(180deg); /* Nascosto dietro la copertina */
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Bottoni */
+        .buttons { position: relative; width: 100%; height: 150px; margin-top: 20px; }
+        button { padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        #btnSi { background: #ff4d4d; color: white; }
+        #btnNo { background: #888; color: white; position: absolute; left: 50%; transform: translateX(-50%); }
     </style>
 </head>
 <body>
 
-    <h1>Mi ami almeno un pochetto? 💛</h1>
+    <div class="book" id="libro" onclick="apriLibro()">
+        <!-- Parte frontale del libro -->
+        <div class="cover">
+            <h2>Domandella Importantella 💛</h2>
+            <p style="margin-top: 50px; font-size: 0.8rem;">(Clicca per aprire)</p>
+        </div>
 
-    <div class="buttons">
-        <button id="btnSi" onclick="rispostaSi()">SÌ!</button>
-        <button id="btnNo" onmouseover="scappa()">NO</button>
+        <!-- Parte interna del libro -->
+        <div class="content" id="interno" onclick="event.stopPropagation()">
+            <h1 style="font-size: 1.5rem;">Mi ami almeno un pochetto? 💛</h1>
+            <div class="buttons">
+                <button id="btnSi" onclick="rispostaSi()">SÌ!</button>
+                <button id="btnNo" onmouseover="scappa()">NO</button>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Funzione per aprire/chiudere il libro
+        function apriLibro() {
+            document.getElementById('libro').classList.toggle('open');
+        }
+
+        // Funzione per far scappare il tasto NO
         function scappa() {
             const btnNo = document.getElementById('btnNo');
-            // Calcola posizioni casuali
-            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            // Calcola movimenti casuali ma limitati all'interno della pagina
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
             
+            // Il tasto esce dal libro e si muove nello schermo
+            btnNo.style.position = 'fixed'; 
             btnNo.style.left = x + 'px';
             btnNo.style.top = y + 'px';
         }
 
+        // Risposta al SI
         function rispostaSi() {
-            alert('Lo sapevo! ❤️ Ti amo anche io tantissimo!');
-            document.body.innerHTML = "<h1>Sapevo che avresti detto di SÌ! 😍</h1><div style='font-size:100px'>❤️</div>";
+            document.getElementById('interno').innerHTML = `
+                <h1 style="color: #ff4d4d;">Lo sapevo! ❤️</h1>
+                <p>Ti amo tantissimo!</p>
+                <div style="font-size: 60px;">😍</div>
+            `;
         }
+    </script>
+</body>
+</html>
+
     </script>
 </body>
 </html>
