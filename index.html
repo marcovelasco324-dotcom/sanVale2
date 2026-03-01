@@ -3,123 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Per Te 💛</title>
+    <title>Lady Whistledown presenta... 🐝</title>
+    <!-- Font Eleganti stile Bridgerton -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
     <style>
-        /* Sfondo e centratura */
         body { 
-            background: #fff5f5; 
+            background: #e3f2fd; /* Azzurro polvere Bridgerton */
             display: flex; 
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
             margin: 0; 
-            font-family: 'Arial', sans-serif;
-            perspective: 1500px; /* Effetto profondità 3D */
+            font-family: 'Playfair Display', serif;
+            perspective: 1500px;
         }
 
-        /* Contenitore del libro */
         .book {
-            width: 300px;
-            height: 400px;
+            width: 320px;
+            height: 450px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: transform 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
             cursor: pointer;
         }
 
-        /* Classe per l'apertura (si attiva al click) */
-        .book.open {
-            transform: rotateY(-160deg);
-        }
+        .book.open { transform: rotateY(-160deg); }
 
-        /* Caratteristiche comuni a copertina e interno */
         .cover, .content {
             position: absolute;
             width: 100%;
             height: 100%;
-            border-radius: 10px 20px 20px 10px;
+            border-radius: 5px 15px 15px 5px;
+            backface-visibility: hidden;
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.2);
+            border: 2px solid #b19470; /* Oro antico */
+        }
+
+        /* COPERTINA - Stile Regency */
+        .cover {
+            background: #89abe3; /* Il blu della famiglia Bridgerton */
+            color: #fcfaf1;
+            z-index: 2;
+            transform-origin: left;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            backface-visibility: hidden;
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* COPERTINA (Esterna) */
-        .cover {
-            background: #ff4d4d;
-            color: white;
-            z-index: 2;
-            transform-origin: left;
-            transition: transform 1s;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            border: 2px solid #e63939;
         }
 
-        .cover h2 { font-size: 1.8rem; }
+        /* LOGO */
+        .logo-bridgerton {
+            width: 80%;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1); /* Rende il logo bianco se lo sfondo è scuro */
+        }
 
-        /* INTERNO (La domanda) */
+        .cover h2 { 
+            font-family: 'Cinzel Decorative', cursive; 
+            font-size: 1.6rem;
+            border-bottom: 1px solid #fcfaf1;
+            padding-bottom: 10px;
+        }
+
+        /* INTERNO - Lettera di Lady Whistledown */
         .content {
-            background: white;
-            color: #333;
-            transform: rotateY(180deg); /* Nascosto dietro la copertina */
-            padding: 20px;
+            background: #fcfaf1; /* Colore carta antica */
+            color: #2c3e50;
+            transform: rotateY(180deg);
+            padding: 30px;
             text-align: center;
+            background-image: url('https://www.transparenttextures.com');
         }
 
-        /* Bottoni */
-        .buttons { position: relative; width: 100%; height: 150px; margin-top: 20px; }
-        button { padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; }
-        #btnSi { background: #ff4d4d; color: white; }
-        #btnNo { background: #888; color: white; position: absolute; left: 50%; transform: translateX(-50%); }
+        .content h1 { font-size: 1.4rem; font-style: italic; }
+
+        /* Bottoni Eleganti */
+        .buttons { position: relative; width: 100%; height: 120px; margin-top: 30px; }
+        button { 
+            padding: 10px 25px; 
+            border: 1px solid #b19470; 
+            border-radius: 0; /* Tasti squadrati più classici */
+            cursor: pointer; 
+            font-family: 'Cinzel Decorative', cursive;
+            transition: 0.3s;
+        }
+        #btnSi { background: #89abe3; color: white; box-shadow: 3px 3px 0px #b19470; }
+        #btnNo { background: #fff; color: #888; position: absolute; left: 50%; transform: translateX(-50%); }
+
+        .bee { font-size: 25px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div class="book" id="libro" onclick="apriLibro()">
-        <!-- Parte frontale del libro -->
         <div class="cover">
+            <!-- Sostituisci questo link con l'URL del logo scelto -->
+            <img src="https://upload.wikimedia.org" class="logo-bridgerton" alt="Logo">
             <h2>Domandella Importantella 💛</h2>
-            <p style="margin-top: 50px; font-size: 0.8rem;">(Clicca per aprire)</p>
+            <div class="bee">🐝</div>
         </div>
 
-        <!-- Parte interna del libro -->
-        <div class="content" id="interno" onclick="event.stopPropagation()">
-            <h1 style="font-size: 1.5rem;">Mi ami almeno un pochetto? 💛</h1>
+        <div class="content" onclick="event.stopPropagation()">
+            <h1>Mio caro diamante della stagione...</h1>
+            <p>Mi ami almeno un pochetto? 💛</p>
             <div class="buttons">
-                <button id="btnSi" onclick="rispostaSi()">SÌ!</button>
+                <button id="btnSi" onclick="rispostaSi()">SÌ</button>
                 <button id="btnNo" onmouseover="scappa()">NO</button>
             </div>
+            <div style="margin-top: 20px; font-family: 'Cinzel Decorative'; font-size: 0.7rem;">— Lady Whistledown</div>
         </div>
     </div>
 
     <script>
-        // Funzione per aprire/chiudere il libro
-        function apriLibro() {
-            document.getElementById('libro').classList.toggle('open');
-        }
+        function apriLibro() { document.getElementById('libro').classList.toggle('open'); }
 
-        // Funzione per far scappare il tasto NO
         function scappa() {
             const btnNo = document.getElementById('btnNo');
-            // Calcola movimenti casuali ma limitati all'interno della pagina
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
-            
-            // Il tasto esce dal libro e si muove nello schermo
             btnNo.style.position = 'fixed'; 
             btnNo.style.left = x + 'px';
             btnNo.style.top = y + 'px';
         }
 
-        // Risposta al SI
         function rispostaSi() {
-            document.getElementById('interno').innerHTML = `
-                <h1 style="color: #ff4d4d;">Lo sapevo! ❤️</h1>
-                <p>Ti amo tantissimo!</p>
-                <div style="font-size: 60px;">😍</div>
+            document.getElementById('interno'); // Non serve, usiamo il body per il gran finale
+            document.body.innerHTML = `
+                <div style="text-align:center;">
+                    <h1 style="font-family:'Cinzel Decorative'; color:#89abe3;">È ufficiale! ❤️</h1>
+                    <p style="font-size:1.5rem;">Un'unione perfetta è stata dichiarata.</p>
+                    <div style="font-size: 80px;">🐝</div>
+                </div>
             `;
         }
     </script>
