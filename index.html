@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Una Proposta dalla Stagione 🐝</title>
-    <!-- Font Eleganti Originali Bridgerton -->
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     
     <style>
@@ -12,7 +11,6 @@
             --blue-bridgerton: #89abe3;
             --gold-antico: #b19470;
             --carta: #fcfaf1;
-            --ombra: rgba(0, 0, 0, 0.15);
         }
 
         body { 
@@ -27,7 +25,6 @@
             overflow: hidden;
         }
 
-        /* Il Libro */
         .book {
             width: 320px;
             height: 450px;
@@ -38,9 +35,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.25);
         }
 
-        .book.open { 
-            transform: rotateY(-160deg) translateX(50px); 
-        }
+        .book.open { transform: rotateY(-160deg) translateX(50px); }
 
         .cover, .content {
             position: absolute;
@@ -54,10 +49,8 @@
             align-items: center;
             padding: 35px;
             box-sizing: border-box;
-            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* COPERTINA */
         .cover {
             background: var(--blue-bridgerton);
             background-image: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
@@ -68,33 +61,22 @@
             text-align: center;
         }
 
-        .cover::after {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; width: 15px; height: 100%;
-            background: rgba(0,0,0,0.1);
-            border-radius: 3px 0 0 3px;
-        }
-
-        /* LOGO JPG SISTEMATO */
+        /* LOGO RIDOTTO */
         .logo-bridgerton { 
-            width: 100%; 
-            max-width: 220px;
-            margin-bottom: 25px; 
-            border-radius: 8px; /* Arrotonda leggermente i bordi del JPG */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Gli dà profondità sulla copertina */
-            /* filter: brightness(0) invert(1); <- Rimosso per mostrare i colori originali */
+            width: 120px; /* Ridotto da 220px */
+            height: auto;
+            margin-bottom: 20px; 
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .cover h2 { 
             font-family: 'Cinzel Decorative', cursive; 
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             letter-spacing: 1px;
             line-height: 1.4;
-            margin: 0;
         }
 
-        /* INTERNO */
         .content {
             background: var(--carta);
             color: #2c3e50;
@@ -103,13 +85,6 @@
             background-image: linear-gradient(to right, rgba(0,0,0,0.08) 0%, transparent 15%);
         }
 
-        .content h1 { 
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 1.3rem; 
-            margin-bottom: 20px;
-        }
-
-        /* Bottoni */
         .buttons { position: relative; width: 100%; height: 130px; margin-top: 30px; }
 
         button { 
@@ -118,11 +93,9 @@
             cursor: pointer; 
             font-family: 'Cinzel Decorative', cursive;
             font-size: 0.8rem;
-            transition: all 0.3s ease;
         }
 
         #btnSi { background: var(--blue-bridgerton); color: white; }
-        #btnSi:hover { transform: scale(1.1); background: #7a9ad1; }
 
         #btnNo { 
             background: white; 
@@ -130,7 +103,6 @@
             position: absolute; 
             left: 50%; 
             transform: translateX(-50%);
-            transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
         }
 
         .signature {
@@ -140,9 +112,6 @@
             border-top: 1px solid rgba(0,0,0,0.1);
             padding-top: 10px;
         }
-
-        .success-message { animation: fadeIn 1s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -151,11 +120,11 @@
         <div class="cover">
             <img src="5bb28e1410b216dc1b8f9a5d22eea84d.jpg" class="logo-bridgerton" alt="Logo">
             <h2>Domandella Importantella 💛</h2>
-            <div style="font-size: 24px; margin-top: 20px;">🐝</div>
+            <div style="font-size: 20px; margin-top: 15px;">🐝</div>
         </div>
 
         <div class="content" id="interno" onclick="event.stopPropagation()">
-            <h1>Mio caro diamante della stagione...</h1>
+            <h1 style="font-family: 'Cinzel Decorative'; font-size: 1.2rem;">Mio caro diamante della stagione...</h1>
             <p>Mi ami almeno un pochetto? 💛</p>
             
             <div class="buttons">
@@ -174,25 +143,28 @@
 
         function scappa() {
             const btnNo = document.getElementById('btnNo');
-            const padding = 50;
-            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - padding);
-            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - padding);
+            // Calcolo per rimanere nei bordi
+            const maxWidth = window.innerWidth - btnNo.offsetWidth - 40;
+            const maxHeight = window.innerHeight - btnNo.offsetHeight - 40;
+            const x = Math.max(20, Math.floor(Math.random() * maxWidth));
+            const y = Math.max(20, Math.floor(Math.random() * maxHeight));
+            
             btnNo.style.position = 'fixed'; 
             btnNo.style.left = x + 'px';
             btnNo.style.top = y + 'px';
         }
 
         function rispostaSi() {
-            const interno = document.getElementById('interno');
-            interno.innerHTML = `
-                <div class="success-message">
-                    <h1 style="color: #89abe3;">È ufficiale! ❤️</h1>
+            document.getElementById('interno').innerHTML = `
+                <div style="animation: fadeIn 1s ease; text-align: center;">
+                    <h1 style="font-family: 'Cinzel Decorative'; color: #89abe3;">È ufficiale! ❤️</h1>
                     <p>Un'unione perfetta è stata dichiarata tra noi.</p>
-                    <div style="font-size: 60px; margin-top: 20px;">🐝</div>
-                    <p style="font-size: 0.8rem; margin-top: 20px;">(Ti amo tantissimo)</p>
+                    <div style="font-size: 50px; margin-top: 15px;">🐝</div>
+                    <p style="font-size: 0.8rem; margin-top: 15px;">(Ti amo tantissimo)</p>
                 </div>
             `;
         }
     </script>
 </body>
 </html>
+
