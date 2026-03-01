@@ -61,19 +61,16 @@
             text-align: center;
         }
 
-        /* LOGO RIDOTTO */
         .logo-bridgerton { 
-            width: 120px; /* Ridotto da 220px */
+            width: 80px; 
             height: auto;
             margin-bottom: 20px; 
-            border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-radius: 4px;
         }
 
         .cover h2 { 
             font-family: 'Cinzel Decorative', cursive; 
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            font-size: 1.3rem;
             line-height: 1.4;
         }
 
@@ -103,6 +100,7 @@
             position: absolute; 
             left: 50%; 
             transform: translateX(-50%);
+            z-index: 999; /* Assicura che sia sempre sopra tutto */
         }
 
         .signature {
@@ -143,15 +141,20 @@
 
         function scappa() {
             const btnNo = document.getElementById('btnNo');
-            // Calcolo per rimanere nei bordi
-            const maxWidth = window.innerWidth - btnNo.offsetWidth - 40;
-            const maxHeight = window.innerHeight - btnNo.offsetHeight - 40;
-            const x = Math.max(20, Math.floor(Math.random() * maxWidth));
-            const y = Math.max(20, Math.floor(Math.random() * maxHeight));
             
-            btnNo.style.position = 'fixed'; 
-            btnNo.style.left = x + 'px';
-            btnNo.style.top = y + 'px';
+            // Calcola i limiti della finestra
+            const maxWidth = window.innerWidth - btnNo.offsetWidth - 20;
+            const maxHeight = window.innerHeight - btnNo.offsetHeight - 20;
+            
+            // Genera nuove coordinate casuali
+            const newX = Math.floor(Math.random() * maxWidth);
+            const newY = Math.floor(Math.random() * maxHeight);
+            
+            // Forza il bottone a restare visibile e scappare
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = newX + 'px';
+            btnNo.style.top = newY + 'px';
+            btnNo.style.display = 'block'; // Si assicura che non sparisca mai
         }
 
         function rispostaSi() {
