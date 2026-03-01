@@ -61,20 +61,23 @@
             text-align: center;
         }
 
-        /* LOGO RIDOTTO */
+        /* LOGO ULTERIORMENTE RIDOTTO (METÀ) */
         .logo-bridgerton { 
-            width: 120px; /* Ridotto da 220px */
+            width: 60px; /* Ridotto della metà rispetto ai 120px precedenti */
             height: auto;
-            margin-bottom: 20px; 
-            border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-bottom: 25px; 
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
+        /* FONT UNIFORMATO A 'Playfair Display' */
         .cover h2 { 
-            font-family: 'Cinzel Decorative', cursive; 
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            line-height: 1.4;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            margin: 0;
         }
 
         .content {
@@ -91,8 +94,10 @@
             padding: 12px 30px; 
             border: 1px solid var(--gold-antico); 
             cursor: pointer; 
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 0.8rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
 
         #btnSi { background: var(--blue-bridgerton); color: white; }
@@ -120,11 +125,11 @@
         <div class="cover">
             <img src="5bb28e1410b216dc1b8f9a5d22eea84d.jpg" class="logo-bridgerton" alt="Logo">
             <h2>Domandella Importantella 💛</h2>
-            <div style="font-size: 20px; margin-top: 15px;">🐝</div>
+            <div style="font-size: 18px; margin-top: 20px; opacity: 0.8;">🐝</div>
         </div>
 
         <div class="content" id="interno" onclick="event.stopPropagation()">
-            <h1 style="font-family: 'Cinzel Decorative'; font-size: 1.2rem;">Mio caro diamante della stagione...</h1>
+            <h1 style="font-size: 1.3rem; font-weight: 700;">Mio caro diamante della stagione...</h1>
             <p>Mi ami almeno un pochetto? 💛</p>
             
             <div class="buttons">
@@ -143,7 +148,6 @@
 
         function scappa() {
             const btnNo = document.getElementById('btnNo');
-            // Calcolo per rimanere nei bordi
             const maxWidth = window.innerWidth - btnNo.offsetWidth - 40;
             const maxHeight = window.innerHeight - btnNo.offsetHeight - 40;
             const x = Math.max(20, Math.floor(Math.random() * maxWidth));
@@ -157,14 +161,13 @@
         function rispostaSi() {
             document.getElementById('interno').innerHTML = `
                 <div style="animation: fadeIn 1s ease; text-align: center;">
-                    <h1 style="font-family: 'Cinzel Decorative'; color: #89abe3;">È ufficiale! ❤️</h1>
+                    <h1 style="color: #89abe3; font-weight: 700;">È ufficiale! ❤️</h1>
                     <p>Un'unione perfetta è stata dichiarata tra noi.</p>
                     <div style="font-size: 50px; margin-top: 15px;">🐝</div>
-                    <p style="font-size: 0.8rem; margin-top: 15px;">(Ti amo tantissimo)</p>
+                    <p style="font-size: 0.9rem; margin-top: 15px; font-style: italic;">(Ti amo tantissimo)</p>
                 </div>
             `;
         }
     </script>
 </body>
 </html>
-
